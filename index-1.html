@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="MoyoConnect — real people, real conversations. Find a friend or become a companion.">
+  <title>MoyoConnect | Real People. Real Conversations.</title>
+  <style>
+    :root{--black:#111014;--red:#e63946;--pink:#ffe8ed;--white:#fff;--muted:#68636b}
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Arial,Helvetica,sans-serif;background:#fff;color:var(--black);line-height:1.6}
+    header{background:var(--black);color:#fff;padding:16px 5%;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+    .brand{font-size:1.35rem;font-weight:800;letter-spacing:.3px}.brand span{color:#ff6571}
+    nav{display:flex;gap:16px;flex-wrap:wrap}nav a{color:#fff;text-decoration:none;font-size:.9rem}
+    .hero{background:linear-gradient(135deg,#17141b 0%,#35151e 60%,#8f2637 100%);color:#fff;text-align:center;padding:76px 6% 70px}
+    .eyebrow{color:#ffc4ce;text-transform:uppercase;letter-spacing:2px;font-size:.78rem;font-weight:bold}
+    h1{font-size:clamp(2.2rem,7vw,4.3rem);line-height:1.08;margin:14px auto;max-width:800px}
+    .hero p{max-width:620px;margin:18px auto 28px;color:#f7e9ed;font-size:1.08rem}
+    .actions{display:flex;justify-content:center;gap:12px;flex-wrap:wrap}
+    .btn{display:inline-block;padding:13px 22px;border-radius:30px;text-decoration:none;font-weight:bold}
+    .primary{background:var(--red);color:#fff}.secondary{border:1px solid #fff;color:#fff}
+    main{max-width:1100px;margin:auto;padding:54px 5%}
+    .section-title{text-align:center;font-size:2rem;margin:0 0 8px}
+    .intro{text-align:center;color:var(--muted);max-width:650px;margin:0 auto 30px}
+    .cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+    .card{border:1px solid #eee;border-radius:20px;padding:26px;background:#fff;box-shadow:0 8px 28px #17141b0c}
+    .card.pink{background:var(--pink);border-color:#ffd1da}
+    .icon{font-size:2rem}.card h3{margin:8px 0}.card p{color:#5f5961}
+    .features{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:25px}
+    .feature{background:#faf8f9;border-radius:15px;padding:18px;text-align:center}
+    .feature strong{display:block;margin:7px 0}
+    .safety{background:#17141b;color:#fff;border-radius:22px;padding:30px;margin-top:48px}
+    .safety p{color:#e9dfe3}
+    footer{background:#100e12;color:#ddd;text-align:center;padding:25px 5%;font-size:.9rem}
+    footer a{color:#ff9aa7;text-decoration:none}
+    @media(max-width:700px){header{align-items:flex-start}nav{gap:10px}.cards{grid-template-columns:1fr}.features{grid-template-columns:repeat(2,minmax(0,1fr))}.hero{padding:60px 6%}}
+    @media(max-width:380px){.features{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="brand">Moyo<span>Connect</span></div>
+    <nav aria-label="Main navigation">
+      <a href="#home">Home</a><a href="#choices">Get started</a><a href="#safety">Safety</a>
+    </nav>
+  </header>
+
+  <section class="hero" id="home">
+    <div class="eyebrow">Welcome to MoyoConnect</div>
+    <h1>Real People.<br>Real Conversations.</h1>
+    <p>Make meaningful connections through friendly conversations. Find someone to talk to, or become a companion and earn by chatting.</p>
+    <div class="actions">
+      <a class="btn primary" href="#choices">Get started</a>
+      <a class="btn secondary" href="#safety">How we keep you safe</a>
+    </div>
+  </section>
+
+  <main>
+    <section id="choices">
+      <h2 class="section-title">What would you like to do?</h2>
+      <p class="intro">Choose the path that feels right for you. MoyoConnect brings people together through conversation.</p>
+      <div class="cards">
+        <article class="card pink">
+          <div class="icon">💬</div>
+          <h3>Find a Friend</h3>
+          <p>Connect with a verified adult companion for friendly, respectful conversations.</p>
+          <a class="btn primary" href="mailto:hello@moyoconnect.example?subject=Find%20a%20Friend">I'm looking for a friend</a>
+        </article>
+        <article class="card">
+          <div class="icon">❤️</div>
+          <h3>Become a Companion</h3>
+          <p>Meet new people and earn by offering friendly conversations on the platform.</p>
+          <a class="btn primary" href="mailto:hello@moyoconnect.example?subject=Become%20a%20Companion">I want to become a companion</a>
+        </article>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="section-title">Choose how to connect</h2>
+      <p class="intro">Our planned chat options make it easier to have conversations in the way you prefer.</p>
+      <div class="features">
+        <div class="feature"><div class="icon">✉️</div><strong>Text chat</strong><span>Private messages</span></div>
+        <div class="feature"><div class="icon">🎙️</div><strong>Voice chat</strong><span>Talk in real time</span></div>
+        <div class="feature"><div class="icon">📹</div><strong>Video chat</strong><span>Face-to-face calls</span></div>
+        <div class="feature"><div class="icon">🛡️</div><strong>Adult safety</strong><span>18+ and verification planned</span></div>
+      </div>
+    </section>
+
+    <section class="safety" id="safety">
+      <h2>Connection should feel safe.</h2>
+      <p>MoyoConnect is being designed for adults aged 18 and above. Before launch, we plan to add identity checks for companions, privacy controls, and tools to block or report users. Never share passwords, bank PINs, or sensitive personal information in a chat.</p>
+    </section>
+  </main>
+
+  <footer>
+    <div><strong>MoyoConnect</strong> — Real People. Real Conversations.</div>
+    <div>Launching in Tanzania, with a vision to connect worldwide.</div>
+    <div style="margin-top:8px">© 2026 MoyoConnect</div>
+  </footer>
+</body>
+</html>
