@@ -1,0 +1,255 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MoyoConnect Video Call</title>
+
+<style>
+*{box-sizing:border-box}
+body{
+ margin:0;
+ background:#101014;
+ color:white;
+ font-family:Arial,sans-serif;
+}
+header{
+ background:#191920;
+ padding:18px;
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ border-bottom:1px solid #333;
+}
+.logo{font-size:23px;font-weight:bold}
+.logo span{color:#ff477e}
+a{color:#ff477e;text-decoration:none}
+main{max-width:750px;margin:auto;padding:15px}
+h1{text-align:center}
+.subtitle{text-align:center;color:#aaa}
+.video-box{
+ background:#20202a;
+ border-radius:15px;
+ overflow:hidden;
+ position:relative;
+ min-height:300px;
+ display:flex;
+ justify-content:center;
+ align-items:center;
+ border:1px solid #444;
+}
+video{
+ width:100%;
+ max-height:450px;
+ object-fit:cover;
+}
+#cameraPlaceholder{
+ color:#aaa;
+ text-align:center;
+ padding:30px;
+}
+.status{
+ text-align:center;
+ margin:15px;
+ color:#42df8b;
+}
+.timer{
+ text-align:center;
+ font-size:25px;
+ font-weight:bold;
+ margin:15px;
+}
+.controls{
+ display:flex;
+ justify-content:center;
+ gap:12px;
+ flex-wrap:wrap;
+ margin:20px 0;
+}
+button{
+ border:0;
+ border-radius:10px;
+ padding:14px 18px;
+ color:white;
+ background:#33333e;
+ font-weight:bold;
+ cursor:pointer;
+}
+.start{background:#ff477e}
+.end{background:#e53935}
+.info{
+ background:#1d1d25;
+ padding:18px;
+ border-radius:12px;
+ margin-top:20px;
+ color:#bbb;
+ line-height:1.7;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+ <div class="logo">Moyo<span>Connect</span></div>
+ <a href="index.html">← Home</a>
+</header>
+
+<main>
+
+<h1>Video Call ❤️</h1>
+<p class="subtitle">Connect face to face with MoyoConnect</p>
+
+<div class="video-box">
+
+ <video id="localVideo" autoplay playsinline muted
+ style="display:none"></video>
+
+ <div id="cameraPlaceholder">
+  <h2>📹</h2>
+  <p>Your camera preview will appear here.</p>
+ </div>
+
+</div>
+
+<div class="status" id="status">
+ Camera is not started
+</div>
+
+<div class="timer" id="timer">00:00</div>
+
+<div class="controls">
+
+ <button class="start" onclick="startCamera()">
+ Start Camera
+ </button>
+
+ <button onclick="toggleCamera()">
+ Camera ON/OFF
+ </button>
+
+ <button onclick="toggleMic()">
+ Microphone ON/OFF
+ </button>
+
+ <button class="end" onclick="endCall()">
+ End Call
+ </button>
+
+</div>
+
+<div class="info">
+ <h3>Call Information</h3>
+ <p>Platform: MoyoConnect</p>
+ <p>Call type: Video</p>
+ <p>Currency: TZS / USD</p>
+ <p>Companion earnings: 80%</p>
+ <p>MoyoConnect commission: 20%</p>
+ <p>Payment: Coming soon</p>
+</div>
+
+</main>
+
+<script>
+let stream=null;
+let cameraOn=true;
+let micOn=true;
+let seconds=0;
+let timerInterval=null;
+
+async function startCamera(){
+
+ try{
+  stream=await navigator.mediaDevices.getUserMedia({
+   video:true,
+   audio:true
+  });
+
+  const video=document.getElementById("localVideo");
+
+  video.srcObject=stream;
+  video.style.display="block";
+
+  document.getElementById("cameraPlaceholder").style.display="none";
+
+  cameraOn=true;
+  micOn=true;
+
+  document.getElementById("status").textContent=
+   "Camera and microphone are ON - Local demo";
+
+  startTimer();
+
+ }catch(error){
+  alert("Camera access failed. Please allow camera and microphone permissions and use HTTPS.");
+ }
+}
+
+function toggleCamera(){
+
+ if(!stream)return alert("Start camera first.");
+
+ cameraOn=!cameraOn;
+
+ stream.getVideoTracks().forEach(track=>{
+  track.enabled=cameraOn;
+ });
+
+ document.getElementById("status").textContent=
+  "Camera: "+(cameraOn?"ON":"OFF");
+}
+
+function toggleMic(){
+
+ if(!stream)return alert("Start camera first.");
+
+ micOn=!micOn;
+
+ stream.getAudioTracks().forEach(track=>{
+  track.enabled=micOn;
+ });
+
+ document.getElementById("status").textContent=
+  "Microphone: "+(micOn?"ON":"OFF");
+}
+
+function startTimer(){
+
+ if(timerInterval)return;
+
+ timerInterval=setInterval(()=>{
+  seconds++;
+
+  let min=String(Math.floor(seconds/60)).padStart(2,"0");
+  let sec=String(seconds%60).padStart(2,"0");
+
+  document.getElementById("timer").textContent=min+":"+sec;
+ },1000);
+}
+
+function endCall(){
+
+ if(stream){
+  stream.getTracks().forEach(track=>track.stop());
+  stream=null;
+ }
+
+ clearInterval(timerInterval);
+ timerInterval=null;
+
+ seconds=0;
+ cameraOn=true;
+ micOn=true;
+
+ document.getElementById("timer").textContent="00:00";
+ document.getElementById("localVideo").style.display="none";
+ document.getElementById("localVideo").srcObject=null;
+ document.getElementById("cameraPlaceholder").style.display="block";
+ document.getElementById("status").textContent="Call ended";
+
+}
+</script>
+
+</body>
+</html>
